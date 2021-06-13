@@ -8,21 +8,22 @@ Turn *-- CodeBreaker
 Turn *-- CodeMaker
 
 CodeBreaker -u-|> Player
-    CodeBreaker --> "0..12" TryCode
+    CodeBreaker --> TryCode
 CodeMaker -u-|> Player
     CodeMaker --> SecretCode
     CodeMaker ..> CodeResult
 
-Board *-- "1" SecretCode
-Board *-- "0..12" TryCode
-Board *-- "0..12" CodeResult
+Board *-- SecretCode
+Board *-- "12" TryCode
+Board *-- "12" CodeResult
 
 SecretCode --|> Code
 TryCode --|> Code
 
-CodeResult *-- "5" ResultColor
-    White -u-|> ResultColor
-    Black -u-|> ResultColor
+CodeResult *-- "n<5" Black
+CodeResult *-- "1..5-n" White
+    Black --|> ResultColor 
+    White --|> ResultColor 
 
 Code *-- "5" CodeColor
     Red -u-|> CodeColor
