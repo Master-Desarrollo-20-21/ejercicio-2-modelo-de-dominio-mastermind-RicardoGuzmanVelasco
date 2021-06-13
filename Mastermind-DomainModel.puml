@@ -1,0 +1,36 @@
+@startuml
+
+MasterMind *-- Board
+MasterMind *-- "2" Player
+MasterMind *-- Turn
+
+Turn *-- CodeBreaker
+Turn *-- CodeMaker
+
+CodeBreaker -u-|> Player
+    CodeBreaker --> "0..15" TryCode
+CodeMaker -u-|> Player
+    CodeMaker --> SecretCode
+    CodeMaker ..> CodeResult
+
+Board *-- "1" SecretCode
+Board *-- "0..12" TryCode
+Board *-- "0..12" CodeResult
+
+SecretCode --|> Code
+TryCode --|> Code
+
+CodeResult *-- "5" ResultColor
+    White -u-|> ResultColor
+    Black -u-|> ResultColor
+
+Code *-- "5" CodeColor
+    Red -u-|> CodeColor
+    Blue -u-|> CodeColor
+    Green -u-|> CodeColor
+    Yellow -u-|> CodeColor
+    Pink -u-|> CodeColor
+    Brown -u-|> CodeColor
+
+
+@enduml
